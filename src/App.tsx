@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './App.css';
+import { PlaylistData, MockPlaylists, MoodType } from './types/playlist';
+// ... your other imports
 
 // Mock data to simulate what we'd get from APIs
 const mockPlaylists = {
@@ -93,9 +94,17 @@ function App() {
     }
     
     // Set the playlist based on detected mood
-    setGeneratedPlaylist(mockPlaylists[detectedMood][0]);
-    setIsGenerating(false); // Stop loading
-    setShowPlaylist(true); // Show results
+    const handleMoodDetection = (mood: MoodType) => {
+  if (mood in mockPlaylists) {
+    setGeneratedPlaylist(mockPlaylists[mood][0]);
+    setIsGenerating(false);
+    setShowPlaylist(true);
+  } else {
+    setGeneratedPlaylist(mockPlaylists.happy[0]);
+    setIsGenerating(false);
+    setShowPlaylist(true);
+  }
+};
   };
 
   return (
