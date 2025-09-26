@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { PlaylistData, MockPlaylists, MoodType } from './types/playlist';
-// ... your other imports
 
+// ... your other imports
+import { PlaylistData, MockPlaylists, MoodType } from './types/playlist';
 // Mock data to simulate what we'd get from APIs
-const mockPlaylists = {
+const mockPlaylists: MockPlaylists = {
   happy: [
     {
       id: 1,
@@ -66,7 +66,7 @@ function App() {
   // State variables - these store data that can change
   const [moodInput, setMoodInput] = useState(''); // What user types
   const [isGenerating, setIsGenerating] = useState(false); // Loading state
-  const [generatedPlaylist, setGeneratedPlaylist] = useState(null); // Current playlist
+  const [generatedPlaylist, setGeneratedPlaylist] = useState<PlaylistData | null>(null);
   const [showPlaylist, setShowPlaylist] = useState(false); // Whether to show results
 
   // Function to simulate AI processing and generate playlist
@@ -80,17 +80,12 @@ function App() {
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     // Simple mood detection (in real app, this would be AI)
-    let detectedMood = 'happy'; // default
     const input = moodInput.toLowerCase();
     
     if (input.includes('sad') || input.includes('depressed') || input.includes('down')) {
-      detectedMood = 'sad';
     } else if (input.includes('energetic') || input.includes('workout') || input.includes('pump')) {
-      detectedMood = 'energetic';
     } else if (input.includes('chill') || input.includes('relax') || input.includes('calm')) {
-      detectedMood = 'chill';
     } else if (input.includes('happy') || input.includes('joy') || input.includes('upbeat')) {
-      detectedMood = 'happy';
     }
     
     // Set the playlist based on detected mood
@@ -127,7 +122,7 @@ function App() {
               onChange={(e) => setMoodInput(e.target.value)}
               placeholder="Describe your mood... (e.g., 'I'm feeling happy and want upbeat songs' or 'Need something chill for studying')"
               className="mood-input"
-              rows="4"
+              rows={4}
             />
             <button 
               onClick={generatePlaylist}
