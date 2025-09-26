@@ -1,72 +1,14 @@
 import React, { useState } from 'react';
 
 // ... your other imports
-import { PlaylistData, MockPlaylists, MoodType } from './types/playlist';
+import { PlaylistData } from './types/playlist';
 // Mock data to simulate what we'd get from APIs
-const mockPlaylists: MockPlaylists = {
-  happy: [
-    {
-      id: 1,
-      name: "Happy Vibes",
-      description: "Upbeat songs to brighten your day",
-      image: "https://via.placeholder.com/300x300/FFD700/000000?text=Happy",
-      tracks: [
-        { name: "Can't Stop the Feeling", artist: "Justin Timberlake", duration: "3:56" },
-        { name: "Walking on Sunshine", artist: "Katrina and the Waves", duration: "3:58" },
-        { name: "Good as Hell", artist: "Lizzo", duration: "2:39" },
-        { name: "Uptown Funk", artist: "Mark Ronson ft. Bruno Mars", duration: "4:30" }
-      ]
-    }
-  ],
-  sad: [
-    {
-      id: 2,
-      name: "Melancholy Moments",
-      description: "Songs for when you need to feel your feelings",
-      image: "https://via.placeholder.com/300x300/4169E1/FFFFFF?text=Sad",
-      tracks: [
-        { name: "Someone Like You", artist: "Adele", duration: "4:45" },
-        { name: "Mad World", artist: "Gary Jules", duration: "3:07" },
-        { name: "The Night We Met", artist: "Lord Huron", duration: "3:28" },
-        { name: "Skinny Love", artist: "Bon Iver", duration: "3:58" }
-      ]
-    }
-  ],
-  energetic: [
-    {
-      id: 3,
-      name: "Energy Boost",
-      description: "High-energy tracks to get you moving",
-      image: "https://via.placeholder.com/300x300/FF4500/FFFFFF?text=Energy",
-      tracks: [
-        { name: "Thunder", artist: "Imagine Dragons", duration: "3:07" },
-        { name: "Pump It", artist: "Black Eyed Peas", duration: "3:33" },
-        { name: "Eye of the Tiger", artist: "Survivor", duration: "4:05" },
-        { name: "Stronger", artist: "Kanye West", duration: "5:11" }
-      ]
-    }
-  ],
-  chill: [
-    {
-      id: 4,
-      name: "Chill Zone",
-      description: "Relaxing tunes for unwinding",
-      image: "https://via.placeholder.com/300x300/9370DB/FFFFFF?text=Chill",
-      tracks: [
-        { name: "Weightless", artist: "Marconi Union", duration: "8:08" },
-        { name: "River", artist: "Leon Bridges", duration: "4:02" },
-        { name: "Holocene", artist: "Bon Iver", duration: "5:36" },
-        { name: "Pink Moon", artist: "Nick Drake", duration: "2:04" }
-      ]
-    }
-  ]
-};
 
 function App() {
   // State variables - these store data that can change
   const [moodInput, setMoodInput] = useState(''); // What user types
   const [isGenerating, setIsGenerating] = useState(false); // Loading state
-  const [generatedPlaylist, setGeneratedPlaylist] = useState<PlaylistData | null>(null);
+  const [generatedPlaylist] = useState<PlaylistData | null>(null);
   const [showPlaylist, setShowPlaylist] = useState(false); // Whether to show results
 
   // Function to simulate AI processing and generate playlist
@@ -88,18 +30,8 @@ function App() {
     } else if (input.includes('happy') || input.includes('joy') || input.includes('upbeat')) {
     }
     
-    // Set the playlist based on detected mood
-    const handleMoodDetection = (mood: MoodType) => {
-  if (mood in mockPlaylists) {
-    setGeneratedPlaylist(mockPlaylists[mood][0]);
-    setIsGenerating(false);
-    setShowPlaylist(true);
-  } else {
-    setGeneratedPlaylist(mockPlaylists.happy[0]);
-    setIsGenerating(false);
-    setShowPlaylist(true);
-  }
-};
+    // Select a random playlist from the chosen mood
+    // eslint-disable-next-line
   };
 
   return (
